@@ -102,10 +102,13 @@ h1 {
 
 /*-----------------Priority Styles-----------------*/
 .priority { 
-  font-size: 12px; 
-  padding: 2px 8px; 
-  border-radius: 10px; 
-  color: white; 
+  font-size: 12px;
+  font-weight: bold;
+  padding: 2px 10px;
+  border-radius: 10px;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 .priority-High { 
   background-color: #dc3545; 
@@ -117,4 +120,11 @@ h1 {
 
 .priority-Low { 
   background-color: #28a745; 
+}
+
+#priority-select {
+  padding: 0 8px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
 }
