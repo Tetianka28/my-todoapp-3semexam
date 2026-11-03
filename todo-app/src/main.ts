@@ -1,4 +1,6 @@
 import './style.css'
+import type { Todo, Priority } from './todos'
+import { sortByPriority, filterBySearch } from './todos'
 
 //structure of the data schema
 
@@ -9,16 +11,16 @@ import './style.css'
  * @property completed - true when the todo is done
  * @property priority - optional, older saved todos may not have one
  */
-interface Todo {
-  id: number;
-  text: string;
-  completed: boolean;
-  priority?: Priority; 
+// interface Todo {
+//   id: number;
+//   text: string;
+//   completed: boolean;
+//   priority?: Priority; 
 
-}
+// }
 
 /** The three priority levels a todo can have. */
-type Priority = "Low" | "Medium" | "High";
+// type Priority = "Low" | "Medium" | "High";
 
 /** Key used to store the todos in the browser's local storage. */
 const STORAGE_KEY = "todos";
@@ -53,7 +55,7 @@ const todoList = document.getElementById("todo-list") as HTMLUListElement
 const clearCompletedBtn = document.getElementById("clear-completed-btn") as HTMLButtonElement
 const prioritySelect = document.getElementById("priority-select") as HTMLSelectElement
 /** Sort order for priorities: a lower number is shown first. */
-const priorityOrder: Record<Priority, number> = { High: 0, Medium: 1, Low: 2 }
+// const priorityOrder: Record<Priority, number> = { High: 0, Medium: 1, Low: 2 }
 const searchInput = document.getElementById("search-input") as HTMLInputElement
 let searchQuery: string = ""
 
@@ -117,11 +119,13 @@ const addToggleButtonListener = (li: HTMLLIElement, id: number): void => {
  * @param query - the text typed in the search field
  * @returns the todos whose text contains the query, or the full list if the query is empty
  */
-const filterBySearch = (list: Todo[], query: string): Todo[] => {
+
+
+/* const filterBySearch = (list: Todo[], query: string): Todo[] => {
   const q = query.trim().toLowerCase()
   if (q === "") return list
   return list.filter(todo => todo.text.toLowerCase().includes(q))
-}
+} */
 
 /**
  * Saves the todos, applies the search filter, sorts by priority
@@ -134,9 +138,7 @@ const renderTodos = (): void => {
   todoList.innerHTML = ""
   
 
-  const sortedTodos = [...visibleTodos].sort(
-    (a, b) => priorityOrder[a.priority ?? "Low"] - priorityOrder[b.priority ?? "Low"]
-  )
+  const sortedTodos = sortByPriority(visibleTodos)
 
   sortedTodos.forEach(todo => {
     const priority = todo.priority ?? "Low"   // ?? gives a default if priority is missing
