@@ -76,10 +76,15 @@ h1 {
 }
 .todo-item button {
   border: none;
-  background: #dc3545;
   color: #fff;
   border-radius: 3px;
   cursor: pointer;
+}
+.todo-item .toggle-btn { 
+  background-color: #8e857a; 
+}
+.todo-item .remove-btn { 
+  background-color: #8e857a; 
 }
 
 
