@@ -88,10 +88,22 @@ const clearCompleted = (): void => {
   renderTodos()
 }
 
+/**
+ * Connects the Remove button of one list item to removeTodo.
+ * @param li - the list item that contains the button
+ * @param id - the id of the todo shown in that item
+ */
+
 const addRemoveButtonListener = (li: HTMLLIElement, id: number): void => {
   const removeButton = li.querySelector(".remove-btn")
   removeButton?.addEventListener("click", () => removeTodo(id))
 }
+
+/**
+ * Connects the Done/Undo button of one list item to toggleTodo.
+ * @param li - the list item that contains the button
+ * @param id - the id of the todo shown in that item
+ */
 
 const addToggleButtonListener = (li: HTMLLIElement, id: number): void => {
   const toggleButton = li.querySelector(".toggle-btn")
@@ -110,6 +122,11 @@ const filterBySearch = (list: Todo[], query: string): Todo[] => {
   if (q === "") return list
   return list.filter(todo => todo.text.toLowerCase().includes(q))
 }
+
+/**
+ * Saves the todos, applies the search filter, sorts by priority
+ * and draws every todo in the list.
+ */
 
 const renderTodos = (): void => {
   saveTodos()
