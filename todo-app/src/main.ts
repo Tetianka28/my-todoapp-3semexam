@@ -57,12 +57,21 @@ const priorityOrder: Record<Priority, number> = { High: 0, Medium: 1, Low: 2 }
 const searchInput = document.getElementById("search-input") as HTMLInputElement
 let searchQuery: string = ""
 
+
+/**
+ * Removes the todo with the given id and re-renders the list.
+ * @param id - the id of the todo to remove
+ */
+
 const removeTodo = (id: number): void => {
   todos = todos.filter(todo => todo.id !== id)
   renderTodos()
 }
 
-// flips completed true/false for the todo with the matching id
+/**
+ * Flips the completed status of the todo with the given id.
+ * @param id - the id of the todo to toggle
+ */
 const toggleTodo = (id: number): void => {
   todos = todos.map(todo =>
     todo.id === id ? { ...todo, completed: !todo.completed } : todo
@@ -70,7 +79,10 @@ const toggleTodo = (id: number): void => {
   renderTodos()
 }
 
-// removes every todo where completed is true
+
+/**
+ * Removes every completed todo from the list.
+ */
 const clearCompleted = (): void => {
   todos = todos.filter(todo => !todo.completed)
   renderTodos()
@@ -87,7 +99,12 @@ const addToggleButtonListener = (li: HTMLLIElement, id: number): void => {
 }
 
 
-// returns only the todos whose text contains the query (not case sensitive)
+/**
+ * Filters todos by search text, ignoring upper and lower case.
+ * @param list - the todos to search in
+ * @param query - the text typed in the search field
+ * @returns the todos whose text contains the query, or the full list if the query is empty
+ */
 const filterBySearch = (list: Todo[], query: string): Todo[] => {
   const q = query.trim().toLowerCase()
   if (q === "") return list
@@ -120,6 +137,11 @@ const renderTodos = (): void => {
   })
 }
 
+/**
+ * Creates a new todo, adds it to the list and re-renders.
+ * @param text - the text of the todo
+ * @param priority - the priority chosen in the dropdown
+ */
 
 const addTodo = (text: string, priority: Priority): void => {
   const newTodo: Todo = {
