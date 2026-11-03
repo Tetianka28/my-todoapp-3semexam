@@ -99,3 +99,22 @@ h1 {
   text-decoration: line-through;
   opacity: 0.6;
 }
+
+/*-----------------Priority Styles-----------------*/
+.priority { 
+  font-size: 12px; 
+  padding: 2px 8px; 
+  border-radius: 10px; 
+  color: white; 
+}
+.priority-High { 
+  background-color: #dc3545; 
+}
+
+.priority-Medium { 
+  background-color: #f0ad4e; 
+}
+
+.priority-Low { 
+  background-color: #28a745; 
+}

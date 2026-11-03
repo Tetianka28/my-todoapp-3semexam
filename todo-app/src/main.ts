@@ -5,7 +5,11 @@ interface Todo {
   id: number;
   text: string;
   completed: boolean;
+  priority?: Priority; 
+
 }
+type Priority = "Low" | "Medium" | "High";
+
 const STORAGE_KEY = "todos";
 
 // writes the current list to the browser as a JSON string
@@ -27,6 +31,9 @@ const todoInput = document.getElementById("todo-input") as HTMLInputElement
 const todoForm = document.querySelector(".todo-form") as HTMLFormElement
 const todoList = document.getElementById("todo-list") as HTMLUListElement
 const clearCompletedBtn = document.getElementById("clear-completed-btn") as HTMLButtonElement
+const prioritySelect = document.getElementById("priority-select") as HTMLSelectElement
+
+const priorityOrder: Record<Priority, number> = { High: 0, Medium: 1, Low: 2 }
 
 const removeTodo = (id: number): void => {
   todos = todos.filter(todo => todo.id !== id)
@@ -57,15 +64,38 @@ const addToggleButtonListener = (li: HTMLLIElement, id: number): void => {
   toggleButton?.addEventListener("click", () => toggleTodo(id))
 }
 
+// const renderTodos = (): void => {
+//   saveTodos();
+//   todoList.innerHTML = ""
+
+//   todos.forEach(todo => {
+//     const li = document.createElement("li")
+//     li.className = "todo-item"
+//     li.innerHTML = `
+//       <span class="${todo.completed ? "completed" : ""}">${todo.text}</span>
+//       <button class="toggle-btn">${todo.completed ? "Undo" : "Done"}</button>
+//       <button class="remove-btn">Remove</button>
+//     `
+//     addToggleButtonListener(li, todo.id)
+//     addRemoveButtonListener(li, todo.id)
+//     todoList.appendChild(li)
+//   })
+// }
 const renderTodos = (): void => {
-  saveTodos();
+  saveTodos()
   todoList.innerHTML = ""
 
-  todos.forEach(todo => {
+  const sortedTodos = [...todos].sort(
+    (a, b) => priorityOrder[a.priority ?? "Low"] - priorityOrder[b.priority ?? "Low"]
+  )
+
+  sortedTodos.forEach(todo => {
+    const priority = todo.priority ?? "Low"   // ?? gives a default if priority is missing
     const li = document.createElement("li")
     li.className = "todo-item"
     li.innerHTML = `
       <span class="${todo.completed ? "completed" : ""}">${todo.text}</span>
+      <span class="priority priority-${priority}">${priority}</span>
       <button class="toggle-btn">${todo.completed ? "Undo" : "Done"}</button>
       <button class="remove-btn">Remove</button>
     `
@@ -74,12 +104,22 @@ const renderTodos = (): void => {
     todoList.appendChild(li)
   })
 }
+// const addTodo = (text: string): void => {
+//   const newTodo: Todo = {
+//     id: Date.now(),
+//     text: text,
+//     completed: false,
+//   }
+//   todos.push(newTodo)
+//   renderTodos()
+// }
 
-const addTodo = (text: string): void => {
+const addTodo = (text: string, priority: Priority): void => {
   const newTodo: Todo = {
     id: Date.now(),
     text: text,
     completed: false,
+    priority: priority,
   }
   todos.push(newTodo)
   renderTodos()
@@ -89,7 +129,7 @@ todoForm.addEventListener("submit", (event: Event) => {
   event.preventDefault()
   const text = todoInput.value.trim()
   if (text !== "") {
-    addTodo(text)
+    addTodo(text, prioritySelect.value as Priority)
     todoInput.value = ""
   } else {
     todoInput.classList.add("input-error")
