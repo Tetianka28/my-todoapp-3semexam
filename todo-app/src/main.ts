@@ -4,23 +4,6 @@ import { sortByPriority, filterBySearch } from './todos'
 
 //structure of the data schema
 
-/**
- * A single todo item.
- * @property id - unique id, created with Date.now()
- * @property text - what the user typed
- * @property completed - true when the todo is done
- * @property priority - optional, older saved todos may not have one
- */
-// interface Todo {
-//   id: number;
-//   text: string;
-//   completed: boolean;
-//   priority?: Priority; 
-
-// }
-
-/** The three priority levels a todo can have. */
-// type Priority = "Low" | "Medium" | "High";
 
 /** Key used to store the todos in the browser's local storage. */
 const STORAGE_KEY = "todos";
@@ -47,15 +30,14 @@ const loadTodos = (): Todo[] => {
 
 let todos: Todo[] = loadTodos();
 
-// let todos: Todo[] = [];
 
 const todoInput = document.getElementById("todo-input") as HTMLInputElement
 const todoForm = document.querySelector(".todo-form") as HTMLFormElement
 const todoList = document.getElementById("todo-list") as HTMLUListElement
 const clearCompletedBtn = document.getElementById("clear-completed-btn") as HTMLButtonElement
 const prioritySelect = document.getElementById("priority-select") as HTMLSelectElement
+
 /** Sort order for priorities: a lower number is shown first. */
-// const priorityOrder: Record<Priority, number> = { High: 0, Medium: 1, Low: 2 }
 const searchInput = document.getElementById("search-input") as HTMLInputElement
 let searchQuery: string = ""
 
@@ -112,25 +94,6 @@ const addToggleButtonListener = (li: HTMLLIElement, id: number): void => {
   toggleButton?.addEventListener("click", () => toggleTodo(id))
 }
 
-
-/**
- * Filters todos by search text, ignoring upper and lower case.
- * @param list - the todos to search in
- * @param query - the text typed in the search field
- * @returns the todos whose text contains the query, or the full list if the query is empty
- */
-
-
-/* const filterBySearch = (list: Todo[], query: string): Todo[] => {
-  const q = query.trim().toLowerCase()
-  if (q === "") return list
-  return list.filter(todo => todo.text.toLowerCase().includes(q))
-} */
-
-/**
- * Saves the todos, applies the search filter, sorts by priority
- * and draws every todo in the list.
- */
 
 const renderTodos = (): void => {
   saveTodos()
