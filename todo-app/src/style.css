@@ -94,3 +94,8 @@ h1 {
   margin-top: 5px;
   display: none;
 }
+
+.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
