@@ -64,23 +64,7 @@ const addToggleButtonListener = (li: HTMLLIElement, id: number): void => {
   toggleButton?.addEventListener("click", () => toggleTodo(id))
 }
 
-// const renderTodos = (): void => {
-//   saveTodos();
-//   todoList.innerHTML = ""
 
-//   todos.forEach(todo => {
-//     const li = document.createElement("li")
-//     li.className = "todo-item"
-//     li.innerHTML = `
-//       <span class="${todo.completed ? "completed" : ""}">${todo.text}</span>
-//       <button class="toggle-btn">${todo.completed ? "Undo" : "Done"}</button>
-//       <button class="remove-btn">Remove</button>
-//     `
-//     addToggleButtonListener(li, todo.id)
-//     addRemoveButtonListener(li, todo.id)
-//     todoList.appendChild(li)
-//   })
-// }
 const renderTodos = (): void => {
   saveTodos()
   todoList.innerHTML = ""
@@ -104,15 +88,7 @@ const renderTodos = (): void => {
     todoList.appendChild(li)
   })
 }
-// const addTodo = (text: string): void => {
-//   const newTodo: Todo = {
-//     id: Date.now(),
-//     text: text,
-//     completed: false,
-//   }
-//   todos.push(newTodo)
-//   renderTodos()
-// }
+
 
 const addTodo = (text: string, priority: Priority): void => {
   const newTodo: Todo = {
