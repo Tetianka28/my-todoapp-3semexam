@@ -12,6 +12,7 @@ let todos: Todo[] = [];
 const todoInput = document.getElementById("todo-input") as HTMLInputElement
 const todoForm = document.querySelector(".todo-form") as HTMLFormElement
 const todoList = document.getElementById("todo-list") as HTMLUListElement
+const clearCompletedBtn = document.getElementById("clear-completed-btn") as HTMLButtonElement
 
 const removeTodo = (id: number): void => {
   todos = todos.filter(todo => todo.id !== id)
@@ -23,6 +24,12 @@ const toggleTodo = (id: number): void => {
   todos = todos.map(todo =>
     todo.id === id ? { ...todo, completed: !todo.completed } : todo
   )
+  renderTodos()
+}
+
+// removes every todo where completed is true
+const clearCompleted = (): void => {
+  todos = todos.filter(todo => !todo.completed)
   renderTodos()
 }
 
@@ -77,5 +84,7 @@ todoForm.addEventListener("submit", (event: Event) => {
     }
   }
 })
+
+clearCompletedBtn.addEventListener("click", clearCompleted)
 
 renderTodos()
