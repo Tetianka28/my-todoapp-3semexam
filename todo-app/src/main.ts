@@ -6,8 +6,22 @@ interface Todo {
   text: string;
   completed: boolean;
 }
+const STORAGE_KEY = "todos";
 
-let todos: Todo[] = [];
+// writes the current list to the browser as a JSON string
+const saveTodos = (): void => {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
+};
+
+// reads the list back, or returns an empty list if nothing is saved yet
+const loadTodos = (): Todo[] => {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  return saved ? (JSON.parse(saved) as Todo[]) : [];
+};
+
+let todos: Todo[] = loadTodos();
+
+// let todos: Todo[] = [];
 
 const todoInput = document.getElementById("todo-input") as HTMLInputElement
 const todoForm = document.querySelector(".todo-form") as HTMLFormElement
@@ -44,6 +58,7 @@ const addToggleButtonListener = (li: HTMLLIElement, id: number): void => {
 }
 
 const renderTodos = (): void => {
+  saveTodos();
   todoList.innerHTML = ""
 
   todos.forEach(todo => {
