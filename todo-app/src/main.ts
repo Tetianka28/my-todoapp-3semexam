@@ -20,14 +20,24 @@ interface Todo {
 /** The three priority levels a todo can have. */
 type Priority = "Low" | "Medium" | "High";
 
+/** Key used to store the todos in the browser's local storage. */
 const STORAGE_KEY = "todos";
 
-// writes the current list to the browser as a JSON string
+
+/**
+ * Saves the current todos list to local storage as a JSON string.
+ */
+/**
+ * Writes the current list to the browser as a JSON string.
+ */
 const saveTodos = (): void => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
 };
 
-// reads the list back, or returns an empty list if nothing is saved yet
+/**
+ * Reads the todos from local storage.
+ * @returns the saved todos, or an empty array if nothing is saved yet
+ */
 const loadTodos = (): Todo[] => {
   const saved = localStorage.getItem(STORAGE_KEY);
   return saved ? (JSON.parse(saved) as Todo[]) : [];
