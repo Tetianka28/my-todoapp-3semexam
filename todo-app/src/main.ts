@@ -1,6 +1,14 @@
 import './style.css'
 
 //structure of the data schema
+
+/**
+ * A single todo item.
+ * @property id - unique id, created with Date.now()
+ * @property text - what the user typed
+ * @property completed - true when the todo is done
+ * @property priority - optional, older saved todos may not have one
+ */
 interface Todo {
   id: number;
   text: string;
@@ -8,6 +16,8 @@ interface Todo {
   priority?: Priority; 
 
 }
+
+/** The three priority levels a todo can have. */
 type Priority = "Low" | "Medium" | "High";
 
 const STORAGE_KEY = "todos";
@@ -32,6 +42,7 @@ const todoForm = document.querySelector(".todo-form") as HTMLFormElement
 const todoList = document.getElementById("todo-list") as HTMLUListElement
 const clearCompletedBtn = document.getElementById("clear-completed-btn") as HTMLButtonElement
 const prioritySelect = document.getElementById("priority-select") as HTMLSelectElement
+/** Sort order for priorities: a lower number is shown first. */
 const priorityOrder: Record<Priority, number> = { High: 0, Medium: 1, Low: 2 }
 const searchInput = document.getElementById("search-input") as HTMLInputElement
 let searchQuery: string = ""
