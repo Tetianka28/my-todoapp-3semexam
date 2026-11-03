@@ -68,6 +68,7 @@ const addToggleButtonListener = (li: HTMLLIElement, id: number): void => {
 const renderTodos = (): void => {
   saveTodos()
   todoList.innerHTML = ""
+  
 
   const sortedTodos = [...todos].sort(
     (a, b) => priorityOrder[a.priority ?? "Low"] - priorityOrder[b.priority ?? "Low"]
@@ -76,7 +77,7 @@ const renderTodos = (): void => {
   sortedTodos.forEach(todo => {
     const priority = todo.priority ?? "Low"   // ?? gives a default if priority is missing
     const li = document.createElement("li")
-    li.className = "todo-item"
+    li.className = `todo-item todo-${priority}`
     li.innerHTML = `
       <span class="${todo.completed ? "completed" : ""}">${todo.text}</span>
       <span class="priority priority-${priority}">${priority}</span>

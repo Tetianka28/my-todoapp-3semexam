@@ -128,3 +128,16 @@ h1 {
   background: white;
   cursor: pointer;
 }
+
+.todo-item { 
+  border-left: 5px solid transparent; 
+}
+.todo-High   { 
+  border-left-color: #dc3545; 
+}
+.todo-Medium { 
+  border-left-color: #f0ad4e; 
+}
+.todo-Low    { 
+  border-left-color: #28a745; 
+}
