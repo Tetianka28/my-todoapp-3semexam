@@ -164,3 +164,33 @@ h1 {
 .todo-Low    { 
   border-left-color: #28a745; 
 }
+
+/*-----------------Search Input-----------------*/
+#search-input {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 16px auto;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+
+
+
+/*----------------- Search Input Styles-----------------*/
+
+#search-input {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin: 16px auto;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
+}

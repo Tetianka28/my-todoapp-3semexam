@@ -32,8 +32,9 @@ const todoForm = document.querySelector(".todo-form") as HTMLFormElement
 const todoList = document.getElementById("todo-list") as HTMLUListElement
 const clearCompletedBtn = document.getElementById("clear-completed-btn") as HTMLButtonElement
 const prioritySelect = document.getElementById("priority-select") as HTMLSelectElement
-
 const priorityOrder: Record<Priority, number> = { High: 0, Medium: 1, Low: 2 }
+const searchInput = document.getElementById("search-input") as HTMLInputElement
+let searchQuery: string = ""
 
 const removeTodo = (id: number): void => {
   todos = todos.filter(todo => todo.id !== id)
@@ -65,12 +66,20 @@ const addToggleButtonListener = (li: HTMLLIElement, id: number): void => {
 }
 
 
+// returns only the todos whose text contains the query (not case sensitive)
+const filterBySearch = (list: Todo[], query: string): Todo[] => {
+  const q = query.trim().toLowerCase()
+  if (q === "") return list
+  return list.filter(todo => todo.text.toLowerCase().includes(q))
+}
+
 const renderTodos = (): void => {
   saveTodos()
+  const visibleTodos = filterBySearch(todos, searchQuery)
   todoList.innerHTML = ""
   
 
-  const sortedTodos = [...todos].sort(
+  const sortedTodos = [...visibleTodos].sort(
     (a, b) => priorityOrder[a.priority ?? "Low"] - priorityOrder[b.priority ?? "Low"]
   )
 
@@ -117,6 +126,12 @@ todoForm.addEventListener("submit", (event: Event) => {
   }
 })
 
+searchInput.addEventListener("input", () => {
+  searchQuery = searchInput.value
+  renderTodos()
+})
+
 clearCompletedBtn.addEventListener("click", clearCompleted)
+
 
 renderTodos()
