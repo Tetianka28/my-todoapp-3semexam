@@ -95,10 +95,28 @@ h1 {
   display: none;
 }
 
+/*---------------Completed Todos-------------*/
+
 .completed {
   text-decoration: line-through;
   opacity: 0.6;
 }
+
+#clear-completed-btn {
+  display: block;
+  margin: 16px auto;
+  padding: 8px 16px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#clear-completed-btn:hover { 
+  background-color: #5a6268; 
+}
+
 
 /*-----------------Priority Styles-----------------*/
 .priority { 
