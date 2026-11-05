@@ -31,7 +31,7 @@ const removeTodo = (todos: Todo[], id:number): Todo[] => { //here we call id aga
     })
 }) */
 import { describe, it, expect } from "vitest";
-import type { Todo, Priority } from './todos'
+import type { Todo } from './todos'
 import { sortByPriority, filterBySearch } from './todos'
 
 const make = (id: number, text: string, priority?: Todo["priority"]): Todo => ({

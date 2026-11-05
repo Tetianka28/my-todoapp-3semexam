@@ -1,13 +1,17 @@
+
+
 {
-"name": "todo-app",
-"private": true,
-"version": "0.0.0",
-"type": "module",
-"scripts": {
-  "dev": "vite",
-  "build": "tsc && vite build",
-  "preview": "vite preview"
-},
+  "name": "todo-app",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:e2e": "testcafe chrome:headless tests/ --app \"npm run dev\" --app-init-delay 4000"
+  },
   "devDependencies": {
     "testcafe": "^3.7.7",
     "typescript": "~6.0.2",
